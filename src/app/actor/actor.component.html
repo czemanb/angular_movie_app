@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <div class="overview">
+                <h2 class="title">{{actor?.name}}</h2>
+                <div *ngIf="actor.biography">{{actor.biography}}</div>
+            </div>
+            <div class="stats">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div>
+                            Known For
+                        </div>
+                        <div class="value">
+                            {{ actor?.known_for_department }}
+                        </div>
+                    </li>
+                    <li class="list-group-item" *ngIf="actor.birthday">
+                        <div>
+                            Born
+                        </div>
+                        <div class="value">
+                            {{ actor.birthday }}
+                        </div>
+                    </li>
+                    <li class="list-group-item" *ngIf="actor?.deathday">
+                        <div>
+                            Death
+                        </div>
+                        <div class="value">
+                            {{ actor?.deathday }}
+                        </div>
+                    </li>
+                    <li class="list-group-item" *ngIf="actor.place_of_birth">
+                        <div>
+                            Place of Birth
+                        </div>
+                        <div class="value">
+                            {{ actor?.place_of_birth }}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <div class="col-md-5 order-md-1">
+                <img *ngIf="actor?.profile_path"
+                    src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/{{ actor?.profile_path }}">
+                <img *ngIf="!actor?.profile_path" src="assets/default_image.png" width="200" height="200">
+            </div>
+        </div>
+    </div>
+</div>

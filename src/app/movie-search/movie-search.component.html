@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="form-group">
+    <label for="query">Search for a Movie</label>
+    <input id="query" type="text" class="form-control" [(ngModel)]="query" (keyup.enter)="searchMovies()">
+  </div>
+  <button type="button" (click)="searchMovies()" class="form-control btn btn-primary">Search</button>
+  <hr>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 center">
+    <div class="discover_list" *ngIf="searchRes">
+      <div class="discover_list__movie" *ngFor="let movie of searchRes">
+        <div class="col-mb-3">
+          <a [routerLink]="['/movie', movie.id]">
+            <div class="card text-center">
+              <img *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/{{movie.poster_path}}"
+                class="card-img-top">
+              <img *ngIf="!movie?.poster_path" src="assets/default_image.png" class="card-img-top">
+              <div class="card-body">
+                <p class="card-text">{{ movie.original_title }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

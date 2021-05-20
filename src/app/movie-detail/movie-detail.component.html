@@ -1,0 +1,127 @@
+<ul ngbNav #nav="ngbNav" class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
+    <li ngbNavItem>
+        <a ngbNavLink>Details</a>
+        <ng-template ngbNavContent>
+            <div class="cointainer marketing">
+                <div class="row featurette" *ngIf="movie">
+                    <div class="col-md-7 order-md-2">
+                        <div>
+                            <div class="overview">
+                                <h2 class="title">Storyline</h2>
+                                <div>{{movie?.overview}}</div>
+                            </div>
+                            <div class="stats">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <h5>
+                                            Released
+                                        </h5>
+                                        <div class="value">
+                                            {{ movie?.release_date }}
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <h5>
+                                            Runtime
+                                        </h5>
+                                        <div class="value">
+                                            {{ movie?.runtime }}
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" *ngIf="movie?.budget">
+                                        <h5>
+                                            Budget
+                                        </h5>
+                                        <div class="value">
+                                            ${{ movie?.budget }}
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" *ngIf="movie?.revenue">
+                                        <h5>
+                                            Revenue
+                                        </h5>
+                                        <div class="value">
+                                            ${{ movie?.revenue }}
+                                        </div>
+                                    </li>
+
+                                    <li class="list-group-item" *ngIf="movie?.genres.length">
+                                        <h5>
+                                            Genre
+                                        </h5>
+                                        <div *ngFor="let genre of movie?.genres">
+                                            <div class="value"> {{ genre?.name }}</div> 
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" *ngIf="movie?.status">
+                                        <h5>
+                                            Status
+                                        </h5>
+                                        <div class="value">
+                                            {{movie?.status}}
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" *ngIf="movie?.spoken_languages?.length">
+                                        <h5>
+                                            Language
+                                        </h5>
+                                        <div *ngFor="let language of movie?.spoken_languages">
+                                            <a>{{ language?.name }}</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 order-md-1">
+                        <img *ngIf="movie?.poster_path" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}">
+                        <img *ngIf="!movie?.poster_path" src="assets/default_image.png">
+                    </div>
+
+                </div>
+            </div>
+        </ng-template>
+    </li>
+    <li ngbNavItem>
+        <a ngbNavLink>Cast</a>
+        <ng-template ngbNavContent>
+            <div class="listing-space">
+                <div class="listing__head">
+                    <h2 class="listing__title">Cast</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4" *ngFor="let cast of casts">
+                        <div class="router" [routerLink]="['/actor', cast.id]">
+                            <img class="rounded-circle" *ngIf="cast.profile_path"
+                                src="https://image.tmdb.org/t/p/w200/{{cast?.profile_path}}" width="200" height="200">
+                            <img *ngIf="!cast?.profile_path" src="assets/default_image.png" class="card-img-top">
+                            <h6>{{cast?.name }}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </li>
+
+    <li ngbNavItem>
+        <a ngbNavLink>Similar Movie</a>
+        <ng-template ngbNavContent>
+            <div class="listing-space">
+                <div>
+                    <h1 class="text-center">Have you seen these?</h1>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4" *ngFor="let simmovie of similarMovies">
+                        <a routerLink='/movie/{{simmovie.id}}'>
+                            <img *ngIf="simmovie.poster_path"
+                                src="https://image.tmdb.org/t/p/w370_and_h556_bestv2/{{simmovie.poster_path}}">
+                            <img *ngIf="!simmovie?.poster_path" src="assets/default_image.png">
+                            <h6>{{simmovie.title }}</h6>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </li>
+</ul>
+<div [ngbNavOutlet]="nav"></div>

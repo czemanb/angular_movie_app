@@ -1,0 +1,16 @@
+<div class="container" *ngIf="movies">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col" *ngFor="let movie of movies">
+              <div [routerLink]="['/movie/', movie.id]">
+                  <div class="card text-center">
+                      <img *ngIf="movie?.poster_path" src="https://image.tmdb.org/t/p/w370_and_h556_bestv2{{movie?.poster_path}}"
+                          [alt]="movie.title">
+                      <h6>{{ movie?.title }}</h6>
+                      <p class="year">
+                          <span>{{movie?.release_date | date: 'yyyy'}}</span>
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
